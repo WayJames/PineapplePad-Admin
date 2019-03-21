@@ -37,6 +37,7 @@ export default {
       if (!getters.userGroups.includes('admins')) {
       // User isn't an admin
         let err = { message: 'You are not an admin.' }
+        dispatch('signOut') // sign the user out immediately
         throw err
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
         // User needs a new password
