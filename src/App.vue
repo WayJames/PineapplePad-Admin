@@ -1,12 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <router-link class="navbar-item" to="/">
+          <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        </router-link>
+        <a
+          role="button"
+          :class="{'is-active': mobileMenuOpen}"
+          class="navbar-burger"
+          aria-label="menu" aria-expanded="false"
+          @click="mobileMenuOpen = !mobileMenuOpen">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" :class="{'is-active': mobileMenuOpen}">
+        <div class="navbar-start">
+          <router-link to="/" class="navbar-item">Users</router-link>
+          <router-link to="/" class="navbar-item">Apartment Listings</router-link>
+          <router-link to="/" class="navbar-item">Add Apartment</router-link>
+        </div>
+        <div class="navbar-end">
+          <navbar-user-button @loginClicked="$router.push({name: 'login'})" />
+        </div>
+      </div>
+    </nav>
     <router-view/>
   </div>
 </template>
+<script>
+import NavbarUserButton from '@/components/NavbarUserButton.vue'
+export default {
+  components: {
+    NavbarUserButton
+  }
+}
+</script>
 
 <style>
 #app {
