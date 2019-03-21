@@ -46,6 +46,7 @@ Amplify.configure({
     // authenticationFlowType: 'USER_PASSWORD_AUTH'
   }
 })
+store.dispatch('updateUser')
 
 Vue.use(Buefy)
 

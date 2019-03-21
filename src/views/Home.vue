@@ -1,7 +1,15 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <login-form />>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <article class="is-child notification is-info column is-4 is-offset-4">
+            <login-form />
+          </article>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 

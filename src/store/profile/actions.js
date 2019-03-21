@@ -30,16 +30,23 @@ export default {
       throw err
     }
   },
-  async signIn ({ commit, dispatch }, { username, password, redirect }) {
+  async signIn ({ getters, dispatch }, { username, password, redirect }) {
     try {
       let user = await Auth.signIn(username, password)
       dispatch('updateUser')
-      if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+      if (!getters.userGroups.includes('admins')) {
+      // User isn't an admin
+        let err = { message: 'You are not an admin.' }
+        throw err
+      } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        // User needs a new password
         router.push({ name: 'force_password_change' })
       } else if (redirect) {
+        // We need to redirect somewhere
         router.push(redirect)
       } else {
-        router.push({ name: 'profile' })
+        // Just go to dashboard
+        router.push({ name: 'dashboard' })
       }
       return user
     } catch (err) {
