@@ -12,24 +12,14 @@
                   <b-input type="text" v-model="resetCode" password-reveal placeholder="Reset code" required>
                   </b-input>
                 </b-field>
-                <b-field :label="pwResetMode ? 'New Password' : 'Password'">
+                <b-field :label="'Password'">
                   <b-input type="password" v-model="password" password-reveal placeholder="Your password" required>
                   </b-input>
                 </b-field>
                 <div class="level">
-                  <div class="level-left">
-                    <div class="level-item">
-                      <a class="has-text-black" v-if="pwResetMode" @click="pwResetMode = false">Cancel</a>
-                      <a class="has-text-black" v-else @click="forgotPassword()">Forgot password?</a>
-                    </div>
-                    <div class="level-item">
-                      <router-link class="has-text-black" to="register">Register</router-link>
-                    </div>
-                  </div>
                   <div class="level-right">
                     <div class="level-item">
-                      <button v-bind:class="{ 'is-loading': loading }" v-if="pwResetMode" class="is-pulled-right button is-primary">Submit New Password</button>
-                      <button v-bind:class="{ 'is-loading': loading }" v-else class="is-pulled-right button is-primary">Login</button>
+                      <button v-bind:class="{ 'is-loading': loading }" class="is-pulled-right button is-primary">Login</button>
                     </div>
                   </div>
                 </div>
