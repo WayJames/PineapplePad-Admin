@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img
+      alt="Vue logo"
+      src="../assets/logo.png"
+    >
     <section class="section">
       <div class="container">
         <div class="columns">
@@ -18,7 +21,7 @@
 import LoginForm from '@/components/LoginForm.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     LoginForm
   }

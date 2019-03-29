@@ -10,7 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
-    passwordTemporaryStorage: ''
+    passwordTemporaryStorage: '',
+    credentials: {}
   },
   getters: {
     userSignedIn (state) {
@@ -21,15 +22,15 @@ export default new Vuex.Store({
     },
     userGroups (state) {
       let decoded = jwt.decode(state.user.signInUserSession.accessToken.jwtToken)
-      return decoded['cognito:groups']
+      return decoded['cognito:groups'] || []
     }
   },
   mutations: {
     setUser (state, user) {
       state.user = user
-      if (user == null) {
-        state.transactionData = []
-      }
+    },
+    setCredentials (state, credentials) {
+      state.credentials = credentials
     },
     storePasswordTemporarily (state, password) {
       state.passwordTemporaryStorage = password
