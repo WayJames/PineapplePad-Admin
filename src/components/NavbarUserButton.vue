@@ -31,6 +31,12 @@
         >
           Sign Out
         </a>
+        <a
+          class="navbar-item"
+          @click="$store.dispatch('listUsers')"
+        >
+          list users
+        </a>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify'
 import router from '@/router'
+import AWS from 'aws-sdk'
 
 export default {
   async signOut ({ commit }) {
@@ -11,13 +12,16 @@ export default {
   async updateUser ({ commit, dispatch }) {
     try {
       let user = await Auth.currentAuthenticatedUser()
+      let creds = await Auth.currentUserCredentials()
+      let essentialCreds = Auth.essentialCredentials(creds)
+
+      AWS.config.accessKeyId = essentialCreds.accessKeyId
+      AWS.config.secretAccessKey = essentialCreds.secretAccessKey
+      AWS.config.sessionToken = essentialCreds.sessionToken
       commit('setUser', user)
-      let credentials = await Auth.currentUserCredentials()
-      commit('setCredentials', credentials)
       return user
     } catch (err) {
       commit('setUser', null)
-      commit('setCredentials', null)
       throw err
     }
   },
