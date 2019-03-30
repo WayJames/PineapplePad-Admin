@@ -36,7 +36,7 @@
       >
         <div class="navbar-start">
           <router-link
-            to="/"
+            :to="{name: 'UserList'}"
             class="navbar-item"
           >
             Users

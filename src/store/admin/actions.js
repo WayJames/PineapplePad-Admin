@@ -1,7 +1,8 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk'
 import awsconfig from '@/config'
+
 export default {
-  async listUsers ({ commit }) {
+  async updateUserList ({ commit }) {
     let cognitoidentityserviceprovider = new CognitoIdentityServiceProvider()
     let params = {
       UserPoolId: awsconfig.Auth.userPoolId, /* required */
@@ -10,9 +11,11 @@ export default {
       Limit: 10
       // PaginationToken: 'STRING_VALUE'
     }
-    cognitoidentityserviceprovider.listUsers(params, (data, err) => {
+    cognitoidentityserviceprovider.listUsers(params, (err, data) => {
       if (err) console.log(err)
-      else console.log(data)
+      else {
+        commit('setUserList', data.Users)
+      }
     })
   }
 }

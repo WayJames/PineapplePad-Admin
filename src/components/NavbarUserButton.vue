@@ -33,7 +33,7 @@
         </a>
         <a
           class="navbar-item"
-          @click="$store.dispatch('listUsers')"
+          @click="$store.dispatch('updateUserList')"
         >
           list users
         </a>

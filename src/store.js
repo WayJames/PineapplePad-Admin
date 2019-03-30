@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { get } from 'lodash'
+import _ from 'lodash'
 
 import profileActions from '@/store/profile/actions'
 import adminActions from '@/store/admin/actions'
@@ -18,7 +18,7 @@ export default new Vuex.Store({
       return state.user != null
     },
     userFullName (state) {
-      return get(state, 'user.attributes.name', 'Not signed in.')
+      return _.get(state, 'user.attributes.name', 'Not signed in.')
     },
     userGroups (state) {
       // let decoded = jwt.decode(state.user.signInUserSession.accessToken.jwtToken)
@@ -29,6 +29,21 @@ export default new Vuex.Store({
   mutations: {
     setUser (state, user) {
       state.user = user
+    },
+    setUserList (state, awsusers) {
+      let userList = []
+      // This extracts the attributes into an object because AWS's formatting is weird
+      awsusers.forEach((user) => {
+        console.log(user.Attributes)
+        let attributes = {}
+        user.Attributes.forEach((item) => {
+          console.log(item)
+          attributes[item.Name] = item.Value
+        })
+        userList.push(attributes)
+      })
+
+      state.userList = userList
     },
     storePasswordTemporarily (state, password) {
       state.passwordTemporaryStorage = password
