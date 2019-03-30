@@ -34,6 +34,7 @@ let router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   await store.dispatch('updateUser')
+  next()
 })
 
 export default router

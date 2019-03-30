@@ -15,6 +15,7 @@ export default {
       if (err) console.log(err)
       else {
         commit('setUserList', data.Users)
+        return data.Users
       }
     })
   }
