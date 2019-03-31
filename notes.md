@@ -1,0 +1,2 @@
+## cognito federated identites
+- `in identity pool -> edit identity pool -> authentication providers -> cognito`, find the app client ID for the admin panel. make sure the authenticated role selection is set to "Use Role from Token". This ensures that the authenticated user gets the IAM role from their group, which is important for admin stuff. 
