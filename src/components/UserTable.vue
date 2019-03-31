@@ -1,5 +1,5 @@
 <template>
-  <b-table :data="users">
+  <b-table :data="users" checkable :checked-rows.sync="checkedRows">
     <template slot-scope="props">
       <b-table-column field="name" label="Name">{{props.row.name}}</b-table-column>
       <b-table-column field="email" label="Email">
@@ -37,7 +37,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-
+      checkedRows: []
     }
   },
   computed: mapState({

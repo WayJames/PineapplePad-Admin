@@ -34,10 +34,8 @@ export default new Vuex.Store({
       let userList = []
       // This extracts the attributes into an object because AWS's formatting is weird
       awsusers.forEach((user) => {
-        console.log(user.Attributes)
         let attributes = {}
         user.Attributes.forEach((item) => {
-          console.log(item)
           attributes[item.Name] = item.Value
         })
         userList.push(attributes)
