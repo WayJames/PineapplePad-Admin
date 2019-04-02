@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import UserList from '@/views/UserList.vue'
+import ApartmentList from '@/views/ApartmentList.vue'
 
 import store from './store'
 
@@ -22,6 +23,11 @@ let router = new Router({
       component: UserList
     },
     {
+      path: '/apartment/list',
+      name: 'ApartmentList',
+      component: ApartmentList
+    },
+    {
       path: '/about',
       name: 'dashboard',
       // route level code-splitting
@@ -33,7 +39,7 @@ let router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
-  await store.dispatch('updateUser')
+  if (!store.user) { await store.dispatch('updateUser') }
   next()
 })
 

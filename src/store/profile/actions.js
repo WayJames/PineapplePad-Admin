@@ -5,7 +5,6 @@ import AWS from 'aws-sdk'
 export default {
   async signOut ({ commit }) {
     await Auth.signOut()
-    commit('setDisplayApartmentPrefsWarning', false)
     router.push('/')
     commit('setUser', null)
   },
