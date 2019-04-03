@@ -1,5 +1,5 @@
 <template>
-  <b-table :data="users" checkable :checked-rows.sync="checkedRows">
+  <b-table focusable :selected.sync="selectedUser" @update:selected="$emit('update:selected', selectedUser)" :loading="loading" :data="users" checkable :checked-rows.sync="checkedRows">
     <template slot-scope="props">
       <b-table-column field="name" label="Name">{{props.row.name}}</b-table-column>
       <b-table-column field="email" label="Email">
@@ -28,6 +28,7 @@
           <b-icon icon="cancel" size="is-small"></b-icon>
         </b-tooltip>
       </b-table-column>
+
     </template>
   </b-table>
 </template>
@@ -37,14 +38,21 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      checkedRows: []
+      checkedRows: [],
+      loading: false,
+      detailsOpen: [],
+      selectedUser: {}
     }
   },
   computed: mapState({
     users: 'userList'
   }),
-  async beforeMount () {
-    await this.$store.dispatch('updateUserList')
-  }
+  mounted () {
+    this.loading = true
+    this.$store.dispatch('updateUserList').then(() => {
+      this.loading = false
+    })
+  },
+  props: ['selected']
 }
 </script>

@@ -19,7 +19,7 @@
       class="navbar-item has-dropdown is-hoverable"
     >
       <router-link
-        :to="{name: 'dashboard'}"
+        :to="{name: 'home'}"
         class="navbar-link"
       >
         Hey there, {{ user.attributes.name }}!
@@ -30,12 +30,6 @@
           @click="$store.dispatch('signOut')"
         >
           Sign Out
-        </a>
-        <a
-          class="navbar-item"
-          @click="$store.dispatch('updateUserList')"
-        >
-          list users
         </a>
       </div>
     </div>

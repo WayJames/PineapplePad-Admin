@@ -2,6 +2,8 @@ import { Auth } from 'aws-amplify'
 import router from '@/router'
 import AWS from 'aws-sdk'
 
+import { Snackbar } from 'buefy/dist/components/snackbar'
+
 export default {
   async signOut ({ commit }) {
     await Auth.signOut()
@@ -12,19 +14,19 @@ export default {
     try {
       let user = await Auth.currentAuthenticatedUser()
       let creds = await Auth.currentUserCredentials()
-      let essentialCreds = Auth.essentialCredentials(creds)
+      // let essentialCreds = Auth.essentialCredentials(creds)
 
-      AWS.config.accessKeyId = essentialCreds.accessKeyId
-      AWS.config.secretAccessKey = essentialCreds.secretAccessKey
-      AWS.config.sessionToken = essentialCreds.sessionToken
+      AWS.config.accessKeyId = creds.accessKeyId
+      AWS.config.secretAccessKey = creds.secretAccessKey
+      AWS.config.sessionToken = creds.sessionToken
       commit('setUser', user)
       return user
     } catch (err) {
       commit('setUser', null)
-      throw err
+      return null
     }
   },
-  async signIn ({ getters, dispatch, commit }, { username, password, redirect }) {
+  async signIn ({ getters, dispatch }, { username, password, redirect }) {
     try {
       let user = await Auth.signIn(username, password)
       await dispatch('updateUser')
@@ -35,13 +37,10 @@ export default {
         throw err
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
         // User needs a new password
-        router.push({ name: 'force_password_change' })
+        Snackbar.open('You need to update your password. Please sign in to main PineapplePad to correc this error.')
       } else if (redirect) {
         // We need to redirect somewhere
         router.push(redirect)
-      } else {
-        // Just go to dashboard
-        // router.push({ name: 'dashboard' })
       }
       return user
     } catch (err) {

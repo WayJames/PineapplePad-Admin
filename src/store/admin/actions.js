@@ -12,7 +12,7 @@ export default {
       // PaginationToken: 'STRING_VALUE'
     }
     cognitoidentityserviceprovider.listUsers(params, (err, data) => {
-      if (err) console.log(err)
+      if (err) throw err
       else {
         commit('setUserList', data.Users)
         return data.Users
