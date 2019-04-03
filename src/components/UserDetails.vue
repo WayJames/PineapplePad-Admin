@@ -1,13 +1,13 @@
 <template>
-<section class="section">
-  <div class="tile">
-        <h1 class="title">
-        {{user.name}}
+  <section class="section">
+    <div class="tile">
+      <h1 class="title">
+        {{ user.name }}
       </h1>
       <p class="subtitle">
-        {{user.email}}
+        {{ user.email }}
       </p>
-  </div>
+    </div>
   </section>
 </template>
 <script>

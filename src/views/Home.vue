@@ -12,8 +12,11 @@
           <div class="container">
             <article class="is-child notification is-info column is-4 is-offset-4">
               <login-form v-if="!user" />
-              <div class="notification is-white" v-else>
-                You are already signed in.<br/>
+              <div
+                class="notification is-white"
+                v-else
+              >
+                You are already signed in.<br>
                 Use the buttons above to navigate.
               </div>
             </article>
