@@ -18,5 +18,15 @@ export default {
 
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
     mandatorySignIn: true
+  },
+  API: {
+    endpoints: [
+      {
+        name: 'getPrefsForUser',
+        endpoint: 'https://1jie7wi5r4.execute-api.us-east-1.amazonaws.com/dev/preferences/get/',
+        // service: 'lambda',
+        region: 'us-east-1'
+      }
+    ]
   }
 }

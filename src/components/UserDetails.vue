@@ -1,17 +1,24 @@
 <template>
   <section class="section">
-    <div class="tile">
-      <h1 class="title">
-        {{ user.name }}
-      </h1>
-      <p class="subtitle">
-        {{ user.email }}
-      </p>
-    </div>
+    <p class="title">
+      {{ user.name }}
+    </p>
+    <p class="subtitle">
+      {{ user.email }}<br>
+      {{ user.phone_number }}
+    </p>
+    <p class="title">
+      Apartment Preferences:
+    </p>
   </section>
 </template>
 <script>
 export default {
-  props: ['user']
+  props: ['user'],
+  watch: {
+    user: function (userId, old) {
+      this.$store.dispatch('getPrefsForUser', userId.sub)
+    }
+  }
 }
 </script>

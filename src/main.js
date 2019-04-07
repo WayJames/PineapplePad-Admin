@@ -8,7 +8,7 @@ import Amplify from 'aws-amplify'
 import awsconfig from '@/config.js'
 import AWS from 'aws-sdk'
 
-// window.LOG_LEVEL = 'DEBUG'
+window.LOG_LEVEL = 'DEBUG'
 
 AWS.config.region = 'us-east-1'
 Amplify.configure(awsconfig)

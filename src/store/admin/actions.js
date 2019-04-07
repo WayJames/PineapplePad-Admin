@@ -1,5 +1,6 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk'
 import awsconfig from '@/config'
+import { API, Auth } from 'aws-amplify'
 
 export default {
   async updateUserList ({ commit }) {
@@ -18,5 +19,13 @@ export default {
         return data.Users
       }
     })
+  },
+  async getPrefsForUser ({ commit }, userId) {
+    Auth.currentCredentials()
+      .then(credentials => {
+        console.log(credentials)
+      })
+    let prefs = await API.get('getPrefsForUser', userId)
+    return prefs
   }
 }
